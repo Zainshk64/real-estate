@@ -1,9 +1,15 @@
 import React from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Layout from "../Layout/Layout";
+import { Helmet } from "react-helmet";
 
 const ErrorPage = () => {
   return (
+    <>
+    <Helmet>
+        <title>Estate | Not found</title>
+        <meta name="notfoundpage" content="not-found page content" />
+      </Helmet>
     <Layout>
       <div className="flex flex-col py-96 items-center justify-center h-[70vh] md:h-[90vh]">
         <div className="hidden md:flex">
@@ -30,6 +36,8 @@ const ErrorPage = () => {
         </p>
       </div>
     </Layout>
+    </>
+
   );
 };
 

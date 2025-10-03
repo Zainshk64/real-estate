@@ -12,8 +12,14 @@ import MarketStories from '../components/HomeItem/MarketStories'
 import ParallaxEffect from '../components/HomeItem/ParallaxEffect'
 import Testimonials from '../components/HomeItem/Testmonials'
 import Newsletter from '../components/HomeItem/Newsletter'
+import { Helmet } from 'react-helmet'
 const HomePage = () => {
   return (
+    <>
+    <Helmet>
+        <title>Estate | Home</title>
+        <meta name="home" content="home page content" />
+      </Helmet>
     <Layout>
       <div className="pt-20 space-y-20">
         <HomeShowcase/>
@@ -30,6 +36,8 @@ const HomePage = () => {
       </div>
 
     </Layout>
+    </>
+
   )
 }
 

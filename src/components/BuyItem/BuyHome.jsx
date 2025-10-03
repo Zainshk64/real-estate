@@ -17,6 +17,7 @@ const BuyHome = () => {
 
   return (
       <div className="py-28 mx-auto w-full px-4 max-w-6xl bg-shell text-ink">
+        
         <SectionHeader
           eyebrow="Property Listings"
           title="Find Your Dream Home on Estate Orbit"
