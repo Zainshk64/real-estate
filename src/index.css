@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
+
+@import "tailwindcss";
+
+:root {
+  --color-shell: #f4ede4;
+  --color-ink: #1f1b16;
+  --color-forest: #1f3d2b;
+  --color-sand: #ddc7ae;
+  --color-clay: #c06c41;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+.gradient-border {
+  background: linear-gradient(135deg, rgba(31, 61, 43, 0.22), rgba(192, 108, 65, 0.22));
+}
+
+.card-overlay {
+  background: linear-gradient(176deg, rgba(31, 61, 43, 0.14) 0%, rgba(31, 27, 22, 0.6) 100%);
+}
+
+@theme {
+  --color-shell: #f4ede4;
+  --color-ink: #1f1b16;
+  --color-forest: #1f3d2b;
+  --color-sand: #ddc7ae;
+  --color-clay: #c06c41;
+
+  --font-sans: Inter, sans-serif;
+  --font-serif: "Playfair Display", serif;
+
+  --radius-pill: 9999px;
+  --shadow-collage: 12px 18px 40px rgba(31, 27, 22, 0.12);
+}
+
+body {
+  @apply bg-shell text-ink font-sans leading-relaxed;
+}
