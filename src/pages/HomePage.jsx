@@ -5,7 +5,6 @@ import HomeShowcase from '../components/HomeItem/HomeShowcase'
 import StatsStrip from '../components/HomeItem/StatsStrip'
 import Comparison from '../components/HomeItem/Comparison'
 import Offering from '../components/HomeItem/Offering'
-import HouseComparing from '../components/HomeItem/HouseComparing'
 import FeaturedListings from '../components/HomeItem/FeaturedListing'
 import CategoryShowcase from '../components/HomeItem/CategoryShowcase'
 import MarketStories from '../components/HomeItem/MarketStories'
@@ -13,6 +12,7 @@ import ParallaxEffect from '../components/HomeItem/ParallaxEffect'
 import Testimonials from '../components/HomeItem/Testmonials'
 import Newsletter from '../components/HomeItem/Newsletter'
 import { Helmet } from 'react-helmet'
+import BusinessComparison from '../components/HomeItem/BusinessComparing'
 const HomePage = () => {
   return (
     <>
@@ -26,7 +26,7 @@ const HomePage = () => {
         <StatsStrip/>
         <Comparison/>
         <Offering/>
-        <HouseComparing/>
+        <BusinessComparison/>
         <FeaturedListings/>
         <CategoryShowcase/>
         <MarketStories/>

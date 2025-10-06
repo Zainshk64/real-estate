@@ -4,24 +4,21 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const navItems = [
+  
   {
-    label: "Buy",
-    link: "/buy",
+    label: "Feature",
+    link: "/feature",
   },
   {
-    label: "Projects",
-    link: "/projects",
-  },
-  {
-    label: "admin",
+    label: "Admin",
     link: "/admin",
   },
   {
-    label: "Sale team",
+    label: "Sale Team",
     link: "/saleteam",
   },
   {
-    label: "market",
+    label: "Market",
     link: "/marketing",
   },
 ];

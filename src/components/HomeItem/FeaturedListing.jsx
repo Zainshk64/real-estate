@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 
 function FeaturedListings() {
   return (
-    <section className="bg-shell px-4 py-20">
-      <div className="mx-auto w-full max-w-6xl space-y-10">
+    <section className="bg-shell py-20">
+      <div className="mx-auto w-full px-4  max-w-6xl space-y-10">
         <SectionHeader
-          eyebrow="Marketplace Spotlight"
-          title="Featured residences with concierge-level onboarding"
-          description="Browse the selections trending this week—algorithmically matched to buyer habits, editorially approved by our curators."
+          eyebrow="Featured Business Solutions"
+          title="Discover Our Smart Tools Across Industries"
+          description="From luxury properties and retail stores to digital agencies and manufacturing units — explore how our platform adapts seamlessly to different business needs."
         />
         <div className="grid gap-6 md:grid-cols-3">
           {featuredListings.map((listing, index) => (
@@ -45,7 +45,10 @@ function FeaturedListings() {
                   <span className="text-lg font-semibold text-forest">
                     {listing.price}
                   </span>
-                  <Link to={`/house/${listing.id}`} onClick={()=> scrollTo(0,0)}>
+                  <Link
+                    to={`/house/${listing.id}`}
+                    onClick={() => scrollTo(0, 0)}
+                  >
                     <button className="rounded-pill cursor-pointer border border-forest/30 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-forest transition hover:border-forest">
                       See details
                     </button>

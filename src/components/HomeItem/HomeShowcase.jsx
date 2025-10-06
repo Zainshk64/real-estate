@@ -7,7 +7,6 @@ const heroCards = [
   {
     id: 1,
     title: "Lagoon Residences",
-    location: "PORTO, PORTUGAL",
     image:
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80",
     offset: "md:-rotate-2 md:-translate-y-4",
@@ -15,7 +14,6 @@ const heroCards = [
   {
     id: 2,
     title: "Copperwood Lofts",
-    location: "AUSTIN, USA",
     image:
       "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80",
     offset: "md:rotate-3 md:translate-y-8",
@@ -23,7 +21,6 @@ const heroCards = [
   {
     id: 3,
     title: "Aurora Skytop",
-    location: "DUBAI, UAE",
     image:
       "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?auto=format&fit=crop&w=900&q=80",
     offset: "md:-rotate-1 md:translate-y-12",
@@ -33,7 +30,7 @@ const heroCards = [
 function HomeShowcase() {
   return (
     <section className="relative overflow-hidden bg-shell">
-      <div className="mx-auto  max-w-6xl flex-col gap-10 px-4 pb-24 pt-16 md:flex-row md:items-end md:gap-16 lg:pt-24">
+      <div className="mx-auto max-w-6xl flex-col gap-10 px-4 pb-24 pt-16 md:flex-row md:items-end md:gap-16 lg:pt-24">
         <motion.div
           className="space-y-6 md:flex-1"
           initial={{ opacity: 0, y: 30 }}
@@ -42,27 +39,28 @@ function HomeShowcase() {
         >
           <span className="inline-flex items-center gap-2 rounded-pill bg-sand/40 px-3 py-1 text-xs uppercase tracking-[0.2em] text-forest">
             <Building2 className="h-4 w-4" aria-hidden="true" />
-            LIVE WHERE YOU THRIVE
+            GROW WHERE YOU CONNECT
           </span>
+
           <h1 className="font-serif text-balance text-4xl leading-tight md:text-5xl lg:text-[56px]">
-            Discover designer-crafted homes on a marketplace built for bold
-            property journeys.
+            Drive Growth with Smart Lead Generation, Automation & Insights.
           </h1>
+
           <p className="text-pretty text-base text-ink/75 md:text-lg">
-            Estate Orbit mirrors the intelligence of home marketplaces.
-           Filter by lifestyle,
-            consult experts, and tour immersive stories from trusted developers
-            worldwide.
+            Power your sales, marketing, and admin teams with one intelligent
+            platform for lead generation, campaign management, and engagement
+            analytics — designed for every business, from real estate to IT,
+            retail, and beyond.
           </p>
-          <SearchForm />
+
           <div className="flex flex-wrap items-center gap-6 text-sm text-ink/70">
             <div className="flex items-center gap-3">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-forest/10 text-forest">
                 <Home className="h-5 w-5" aria-hidden="true" />
               </span>
               <div>
-                <p className="font-semibold text-ink">18k+ curated homes</p>
-                <p>Every listing verified in 24h</p>
+                <p className="font-semibold text-ink">100k+ verified leads</p>
+                <p>Scraped, scored, and nurtured via AI</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -70,20 +68,20 @@ function HomeShowcase() {
                 4.9
               </span>
               <div>
-                <p className="font-semibold text-ink">Resident delight score</p>
-                <p>Based on 3,800+ reviews</p>
+                <p className="font-semibold text-ink">Client success score</p>
+                <p>Trusted by 1,200+ businesses</p>
               </div>
             </div>
           </div>
         </motion.div>
       </div>
+
       <div className="px-4 lg:px-14 py-20">
-        <div className="" />
-        <div className="grid  md:grid-cols-3 w-full  gap-6">
+        <div className="grid md:grid-cols-3 w-full gap-6">
           {heroCards.map((card, index) => (
             <motion.article
               key={card.id}
-              className={`relative overflow-hidden rounded-[28px] shadow-collage`}
+              className="relative overflow-hidden rounded-[28px] shadow-collage"
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -104,20 +102,19 @@ function HomeShowcase() {
               />
               <div className="relative flex h-60 flex-col justify-between p-6 text-shell">
                 <div className="space-y-2">
-                  <p className="text-xs tracking-[0.35em]">{card.location}</p>
+                  <p className="text-xs tracking-[0.35em]">{card.industry}</p>
                   <h3 className="text-2xl font-serif leading-tight">
                     {card.title}
                   </h3>
                 </div>
                 <button className="inline-flex w-fit items-center gap-2 rounded-pill bg-shell/90 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-forest transition hover:bg-shell">
-                  Explore residence
+                  Explore use case
                 </button>
               </div>
             </motion.article>
           ))}
         </div>
       </div>
-     
     </section>
   );
 }

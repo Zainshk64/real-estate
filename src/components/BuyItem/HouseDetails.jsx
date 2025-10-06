@@ -16,7 +16,6 @@ export default function HouseDetail() {
 
   return (
     <Layout>
-
       <div className="mx-auto px-4 max-w-6xl py-20 space-y-10">
         <div className="flex flex-col-reverse md:flex-row justify-between pt-20">
           <SectionHeader
@@ -77,26 +76,7 @@ export default function HouseDetail() {
             </div>
           ))}
         </div>
-        <div>
-          <SectionHeader
-            eyebrow=""
-            title="What's Near By?"
-            description={
-              "Whether you're raising a family or enjoying a peaceful retreat, you’ll appreciate the close proximity to essential services, green spaces, and entertainment options."
-            }
-          />
-          <div className="grid  grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-            {Object.entries(house.nearby).map(([key, value]) => (
-              <div
-                key={key}
-                className="rounded-xl even:bg-[#ddc7ae75] odd:bg-sand p-4 shadow-sm"
-              >
-                <p className="text-sm text-ink/70 capitalize">{key}</p>
-                <p className="font- text-xl text-forest">{value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+
         <div className="my-12 space-y-6">
           <SectionHeader
             eyebrow="Get in Touch"
@@ -158,8 +138,28 @@ export default function HouseDetail() {
             </div>
           </div>
         </div>
+
+        {/* <div>
+          <SectionHeader
+            eyebrow=""
+            title="What's Near By?"
+            description={
+              "Whether you're raising a family or enjoying a peaceful retreat, you’ll appreciate the close proximity to essential services, green spaces, and entertainment options."
+            }
+          />
+          <div className="grid  grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+            {Object.entries(house.nearby).map(([key, value]) => (
+              <div
+                key={key}
+                className="rounded-xl even:bg-[#ddc7ae75] odd:bg-sand p-4 shadow-sm"
+              >
+                <p className="text-sm text-ink/70 capitalize">{key}</p>
+                <p className="font- text-xl text-forest">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div> */}
       </div>
     </Layout>
-
   );
 }

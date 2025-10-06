@@ -19,7 +19,7 @@ import {
   Search,
   Filter,
   ChevronRight,
-  CreditCard
+  CreditCard,
 } from "lucide-react";
 import LeadGeneratorContent from "./LeadGeneratorContent";
 import BillingContent from "./BillingContent";
@@ -29,41 +29,41 @@ const AdminDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const tabs = [
-  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { id: "leadgenerator", label: "Lead Generator", icon: Search }, // NEW
-  { id: "leads", label: "Leads", icon: Users },
-  { id: "campaigns", label: "Campaigns", icon: Mail },
-  { id: "posts", label: "Posts", icon: FileText },
-  { id: "comments", label: "Comments", icon: MessageSquare },
-  { id: "users", label: "Users & Roles", icon: UserCog },
-  { id: "billing", label: "Billing", icon: CreditCard }, // NEW
-  { id: "settings", label: "Settings", icon: Settings },
-];
+    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { id: "leadgenerator", label: "Lead Generator", icon: Search }, // NEW
+    { id: "leads", label: "Leads", icon: Users },
+    { id: "campaigns", label: "Campaigns", icon: Mail },
+    { id: "posts", label: "Posts", icon: FileText },
+    { id: "comments", label: "Comments", icon: MessageSquare },
+    { id: "users", label: "Users & Roles", icon: UserCog },
+    { id: "billing", label: "Billing", icon: CreditCard }, // NEW
+    { id: "settings", label: "Settings", icon: Settings },
+  ];
 
-const renderContent = () => {
-  switch (activeTab) {
-    case "dashboard":
-      return <DashboardContent />;
-    case "leadgenerator":
-      return <LeadGeneratorContent />; // NEW
-    case "leads":
-      return <LeadsContent />;
-    case "campaigns":
-      return <CampaignsContent />;
-    case "posts":
-      return <PostsContent />;
-    case "comments":
-      return <CommentsContent />;
-    case "users":
-      return <UsersContent />;
-    case "billing":
-      return <BillingContent />; // NEW
-    case "settings":
-      return <SettingsContent />;
-    default:
-      return <DashboardContent />;
-  }
-};
+  const renderContent = () => {
+    switch (activeTab) {
+      case "dashboard":
+        return <DashboardContent />;
+      case "leadgenerator":
+        return <LeadGeneratorContent />; // NEW
+      case "leads":
+        return <LeadsContent />;
+      case "campaigns":
+        return <CampaignsContent />;
+      case "posts":
+        return <PostsContent />;
+      case "comments":
+        return <CommentsContent />;
+      case "users":
+        return <UsersContent />;
+      case "billing":
+        return <BillingContent />; // NEW
+      case "settings":
+        return <SettingsContent />;
+      default:
+        return <DashboardContent />;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-shell flex">
@@ -184,10 +184,34 @@ const renderContent = () => {
 // Dashboard Content
 const DashboardContent = () => {
   const metrics = [
-    { label: "Total Leads", value: "1,234", change: "+12%", icon: Users, color: "bg-forest" },
-    { label: "Active Campaigns", value: "24", change: "+8%", icon: Mail, color: "bg-clay" },
-    { label: "Conversions", value: "456", change: "+23%", icon: TrendingUp, color: "bg-sand" },
-    { label: "Engagement Rate", value: "67%", change: "+5%", icon: BarChart3, color: "bg-forest" },
+    {
+      label: "Total Leads",
+      value: "1,234",
+      change: "+12%",
+      icon: Users,
+      color: "bg-forest",
+    },
+    {
+      label: "Active Campaigns",
+      value: "24",
+      change: "+8%",
+      icon: Mail,
+      color: "bg-clay",
+    },
+    {
+      label: "Conversions",
+      value: "456",
+      change: "+23%",
+      icon: TrendingUp,
+      color: "bg-sand",
+    },
+    {
+      label: "Engagement Rate",
+      value: "67%",
+      change: "+5%",
+      icon: BarChart3,
+      color: "bg-forest",
+    },
   ];
 
   return (
@@ -204,12 +228,18 @@ const DashboardContent = () => {
               className="bg-white rounded-2xl p-6 shadow-sm border border-sand/20"
             >
               <div className="flex items-center justify-between mb-4">
-                <div className={`w-12 h-12 ${metric.color} rounded-xl flex items-center justify-center`}>
+                <div
+                  className={`w-12 h-12 ${metric.color} rounded-xl flex items-center justify-center`}
+                >
                   <Icon className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-sm font-semibold text-green-600">{metric.change}</span>
+                <span className="text-sm font-semibold text-green-600">
+                  {metric.change}
+                </span>
               </div>
-              <h3 className="text-3xl font-bold text-ink mb-1">{metric.value}</h3>
+              <h3 className="text-3xl font-bold text-ink mb-1">
+                {metric.value}
+              </h3>
               <p className="text-ink/60 text-sm">{metric.label}</p>
             </motion.div>
           );
@@ -218,10 +248,15 @@ const DashboardContent = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-sand/20">
-          <h3 className="text-xl font-bold text-forest mb-4">Recent Activity</h3>
+          <h3 className="text-xl font-bold text-forest mb-4">
+            Recent Activity
+          </h3>
           <div className="space-y-4">
             {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="flex items-center space-x-4 p-3 bg-shell rounded-lg">
+              <div
+                key={item}
+                className="flex items-center space-x-4 p-3 bg-shell rounded-lg"
+              >
                 <div className="w-10 h-10 bg-forest rounded-full flex items-center justify-center">
                   <Users className="w-5 h-5 text-sand" />
                 </div>
@@ -237,8 +272,16 @@ const DashboardContent = () => {
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-sand/20">
           <h3 className="text-xl font-bold text-forest mb-4">Top Campaigns</h3>
           <div className="space-y-4">
-            {["Summer Sale 2024", "Product Launch", "Newsletter #45", "Holiday Special"].map((campaign, idx) => (
-              <div key={campaign} className="flex items-center justify-between p-3 bg-shell rounded-lg">
+            {[
+              "Summer Sale 2024",
+              "Product Launch",
+              "Newsletter #45",
+              "Holiday Special",
+            ].map((campaign, idx) => (
+              <div
+                key={campaign}
+                className="flex items-center justify-between p-3 bg-shell rounded-lg"
+              >
                 <span className="text-ink font-medium">{campaign}</span>
                 <span className="text-clay font-bold">{85 - idx * 5}%</span>
               </div>
@@ -253,10 +296,34 @@ const DashboardContent = () => {
 // Leads Content
 const LeadsContent = () => {
   const leads = [
-    { id: 1, name: "John Smith", email: "john@example.com", score: 92, status: "Hot" },
-    { id: 2, name: "Sarah Johnson", email: "sarah@example.com", score: 78, status: "Warm" },
-    { id: 3, name: "Mike Williams", email: "mike@example.com", score: 65, status: "Cold" },
-    { id: 4, name: "Emily Brown", email: "emily@example.com", score: 88, status: "Hot" },
+    {
+      id: 1,
+      name: "John Smith",
+      email: "john@example.com",
+      score: 92,
+      status: "Hot",
+    },
+    {
+      id: 2,
+      name: "Sarah Johnson",
+      email: "sarah@example.com",
+      score: 78,
+      status: "Warm",
+    },
+    {
+      id: 3,
+      name: "Mike Williams",
+      email: "mike@example.com",
+      score: 65,
+      status: "Cold",
+    },
+    {
+      id: 4,
+      name: "Emily Brown",
+      email: "emily@example.com",
+      score: 88,
+      status: "Hot",
+    },
   ];
 
   return (
@@ -287,17 +354,32 @@ const LeadsContent = () => {
           <table className="w-full">
             <thead className="bg-shell border-b border-sand/20">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">Name</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">Email</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">Score</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">Status</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">Actions</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">
+                  Name
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">
+                  Email
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">
+                  Score
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">
+                  Status
+                </th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-ink">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {leads.map((lead) => (
-                <tr key={lead.id} className="border-b border-sand/10 hover:bg-shell/50 transition-colors">
-                  <td className="px-6 py-4 text-ink font-medium">{lead.name}</td>
+                <tr
+                  key={lead.id}
+                  className="border-b border-sand/10 hover:bg-shell/50 transition-colors"
+                >
+                  <td className="px-6 py-4 text-ink font-medium">
+                    {lead.name}
+                  </td>
                   <td className="px-6 py-4 text-ink/70">{lead.email}</td>
                   <td className="px-6 py-4">
                     <span className="px-3 py-1 bg-forest/10 text-forest rounded-full text-sm font-semibold">
@@ -305,11 +387,15 @@ const LeadsContent = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                      lead.status === "Hot" ? "bg-clay/10 text-clay" :
-                      lead.status === "Warm" ? "bg-sand/30 text-forest" :
-                      "bg-ink/10 text-ink"
-                    }`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                        lead.status === "Hot"
+                          ? "bg-clay/10 text-clay"
+                          : lead.status === "Warm"
+                          ? "bg-sand/30 text-forest"
+                          : "bg-ink/10 text-ink"
+                      }`}
+                    >
                       {lead.status}
                     </span>
                   </td>
@@ -357,8 +443,12 @@ const CampaignsContent = () => {
                 Active
               </span>
             </div>
-            <h3 className="text-lg font-bold text-ink mb-2">Campaign #{item}</h3>
-            <p className="text-ink/60 text-sm mb-4">Email marketing campaign with automated follow-ups</p>
+            <h3 className="text-lg font-bold text-ink mb-2">
+              Campaign #{item}
+            </h3>
+            <p className="text-ink/60 text-sm mb-4">
+              Email marketing campaign with automated follow-ups
+            </p>
             <div className="flex items-center justify-between text-sm">
               <span className="text-ink/60">Open Rate</span>
               <span className="text-forest font-bold">68%</span>
@@ -397,7 +487,10 @@ const PostsContent = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[1, 2, 3, 4].map((item) => (
-          <div key={item} className="bg-white rounded-2xl p-6 shadow-sm border border-sand/20">
+          <div
+            key={item}
+            className="bg-white rounded-2xl p-6 shadow-sm border border-sand/20"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-forest rounded-full flex items-center justify-center">
@@ -410,7 +503,9 @@ const PostsContent = () => {
               </div>
             </div>
             <p className="text-ink/70 mb-4">
-              This is a sample post content that has been rephrased using AI. It maintains the original message while improving clarity and engagement.
+              This is a sample post content that has been rephrased using AI. It
+              maintains the original message while improving clarity and
+              engagement.
             </p>
             <div className="flex gap-2">
               <button className="flex-1 px-4 py-2 bg-forest text-sand rounded-lg hover:bg-clay transition-colors">
@@ -433,7 +528,10 @@ const CommentsContent = () => {
     <div className="space-y-6">
       <div className="bg-white rounded-2xl shadow-sm border border-sand/20 overflow-hidden">
         {[1, 2, 3, 4, 5].map((item) => (
-          <div key={item} className="p-6 border-b border-sand/10 last:border-b-0">
+          <div
+            key={item}
+            className="p-6 border-b border-sand/10 last:border-b-0"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-forest rounded-full flex items-center justify-center">
@@ -449,7 +547,9 @@ const CommentsContent = () => {
               </div>
             </div>
             <p className="text-ink/70 mb-4 ml-16">
-              This is a sample comment showing interest in the product. The AI has analyzed and scored this comment based on engagement potential.
+              This is a sample comment showing interest in the product. The AI
+              has analyzed and scored this comment based on engagement
+              potential.
             </p>
             <div className="ml-16 flex gap-2">
               <button className="px-4 py-2 bg-forest text-sand rounded-lg hover:bg-clay transition-colors flex items-center space-x-2">
@@ -480,13 +580,26 @@ const UsersContent = () => {
         {[
           { name: "Sales Team 1", role: "Sales", email: "sales1@company.com" },
           { name: "Sales Team 2", role: "Sales", email: "sales2@company.com" },
-          { name: "Marketing Team 1", role: "Marketing", email: "marketing1@company.com" },
-          { name: "Marketing Team 2", role: "Marketing", email: "marketing2@company.com" },
+          {
+            name: "Marketing Team 1",
+            role: "Marketing",
+            email: "marketing1@company.com",
+          },
+          {
+            name: "Marketing Team 2",
+            role: "Marketing",
+            email: "marketing2@company.com",
+          },
         ].map((user, idx) => (
-          <div key={idx} className="bg-white rounded-2xl p-6 shadow-sm border border-sand/20">
+          <div
+            key={idx}
+            className="bg-white rounded-2xl p-6 shadow-sm border border-sand/20"
+          >
             <div className="flex items-center space-x-4 mb-4">
               <div className="w-16 h-16 bg-forest rounded-full flex items-center justify-center">
-                <span className="text-sand font-bold text-xl">{user.name.charAt(0)}</span>
+                <span className="text-sand font-bold text-xl">
+                  {user.name.charAt(0)}
+                </span>
               </div>
               <div>
                 <h4 className="font-bold text-ink">{user.name}</h4>
@@ -494,9 +607,13 @@ const UsersContent = () => {
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                user.role === "Sales" ? "bg-clay/10 text-clay" : "bg-forest/10 text-forest"
-              }`}>
+              <span
+                className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  user.role === "Sales"
+                    ? "bg-clay/10 text-clay"
+                    : "bg-forest/10 text-forest"
+                }`}
+              >
                 {user.role}
               </span>
               <button className="text-forest hover:text-clay transition-colors">
@@ -518,7 +635,9 @@ const SettingsContent = () => {
         <h3 className="text-xl font-bold text-forest mb-4">API Keys</h3>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-semibold text-ink mb-2">OpenAI API Key</label>
+            <label className="block text-sm font-semibold text-ink mb-2">
+              OpenAI API Key
+            </label>
             <input
               type="password"
               placeholder="sk-..."
@@ -526,7 +645,9 @@ const SettingsContent = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-ink mb-2">Email Service API</label>
+            <label className="block text-sm font-semibold text-ink mb-2">
+              Email Service API
+            </label>
             <input
               type="password"
               placeholder="Enter API key"
@@ -540,7 +661,10 @@ const SettingsContent = () => {
         <h3 className="text-xl font-bold text-forest mb-4">Integrations</h3>
         <div className="space-y-3">
           {["LinkedIn", "Facebook", "Twitter", "WhatsApp"].map((platform) => (
-            <div key={platform} className="flex items-center justify-between p-4 bg-shell rounded-xl">
+            <div
+              key={platform}
+              className="flex items-center justify-between p-4 bg-shell rounded-xl"
+            >
               <span className="text-ink font-medium">{platform}</span>
               <button className="px-4 py-2 bg-forest text-sand rounded-lg hover:bg-clay transition-colors">
                 Connect
@@ -554,11 +678,19 @@ const SettingsContent = () => {
         <h3 className="text-xl font-bold text-forest mb-4">Compliance</h3>
         <div className="space-y-3">
           <label className="flex items-center space-x-3 cursor-pointer">
-            <input type="checkbox" className="w-5 h-5 rounded border-2 border-forest text-forest" defaultChecked />
+            <input
+              type="checkbox"
+              className="w-5 h-5 rounded border-2 border-forest text-forest"
+              defaultChecked
+            />
             <span className="text-ink">GDPR Compliance</span>
           </label>
           <label className="flex items-center space-x-3 cursor-pointer">
-            <input type="checkbox" className="w-5 h-5 rounded border-2 border-forest text-forest" defaultChecked />
+            <input
+              type="checkbox"
+              className="w-5 h-5 rounded border-2 border-forest text-forest"
+              defaultChecked
+            />
             <span className="text-ink">Email Opt-out Settings</span>
           </label>
         </div>
@@ -570,8 +702,5 @@ const SettingsContent = () => {
     </div>
   );
 };
-
-
-
 
 export default AdminDashboard;

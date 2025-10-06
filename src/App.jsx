@@ -9,6 +9,7 @@ import AdminPage from "./pages/AdminPage.jsx";
 import SaleTeamPage from "./pages/SaleTeamPage.jsx";
 import MarketingPage from "./pages/MarketingPage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import FeaturePage from "./pages/FeaturePage.jsx";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/house/:id" element={<HouseDetail/>} />
           <Route path="/*" element={<ErrorPage/>} />
-          <Route path="/buy" element={<BuyPage/>} />
+          <Route path="/feature" element={<FeaturePage/>} />
           <Route path="/login" element={<LoginPage/>} />
           <Route path="/signup" element={<SignupPage/>} />
           <Route path="/admin" element={<AdminPage/>} />
