@@ -38,3 +38,13 @@ html{
 body {
   @apply bg-shell text-ink font-sans leading-relaxed;
 }
+
+
+/* .anna{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 15px 20px;
+  
+} */

@@ -13,10 +13,6 @@ const navItems = [
     link: "/projects",
   },
   {
-    label: "Insights",
-    link: "/insights",
-  },
-  {
     label: "admin",
     link: "/admin",
   },
@@ -95,9 +91,9 @@ function Navbar() {
 
         <div className="hidden items-center gap-4 md:flex">
           
-          <Link to={"/login"}>
+          <Link to={"/login"} onClick={()=> window.scrollTo(0,0)}>
             <button className="inline-flex items-center gap-2 rounded-xl cursor-pointer bg-forest px-6 py-2 text-shell shadow-collage transition hover:bg-ink">
-              Login
+              Register
             </button>
           </Link>
         </div>
@@ -129,9 +125,9 @@ function Navbar() {
             </nav>
             <div className="items-center md:hidden pb-10 gap-4 flex flex-wrap justify-center ">
               
-              <Link to={"/login"}>
+              <Link to={"/login"} onClick={()=> window.scrollTo(0,0)}>
                 <button className="inline-flex items-center gap-2 rounded-2xl cursor-pointer bg-forest px-4 py-2 text-sm text-shell shadow-collage transition hover:bg-ink">
-                  Login
+                  Register
                 </button>
               </Link>
             </div>

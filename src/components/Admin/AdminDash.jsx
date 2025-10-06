@@ -18,43 +18,52 @@ import {
   Plus,
   Search,
   Filter,
-  ChevronRight
+  ChevronRight,
+  CreditCard
 } from "lucide-react";
+import LeadGeneratorContent from "./LeadGeneratorContent";
+import BillingContent from "./BillingContent";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const tabs = [
-    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { id: "leads", label: "Leads", icon: Users },
-    { id: "campaigns", label: "Campaigns", icon: Mail },
-    { id: "posts", label: "Posts", icon: FileText },
-    { id: "comments", label: "Comments", icon: MessageSquare },
-    { id: "users", label: "Users & Roles", icon: UserCog },
-    { id: "settings", label: "Settings", icon: Settings },
-  ];
+  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { id: "leadgenerator", label: "Lead Generator", icon: Search }, // NEW
+  { id: "leads", label: "Leads", icon: Users },
+  { id: "campaigns", label: "Campaigns", icon: Mail },
+  { id: "posts", label: "Posts", icon: FileText },
+  { id: "comments", label: "Comments", icon: MessageSquare },
+  { id: "users", label: "Users & Roles", icon: UserCog },
+  { id: "billing", label: "Billing", icon: CreditCard }, // NEW
+  { id: "settings", label: "Settings", icon: Settings },
+];
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case "dashboard":
-        return <DashboardContent />;
-      case "leads":
-        return <LeadsContent />;
-      case "campaigns":
-        return <CampaignsContent />;
-      case "posts":
-        return <PostsContent />;
-      case "comments":
-        return <CommentsContent />;
-      case "users":
-        return <UsersContent />;
-      case "settings":
-        return <SettingsContent />;
-      default:
-        return <DashboardContent />;
-    }
-  };
+const renderContent = () => {
+  switch (activeTab) {
+    case "dashboard":
+      return <DashboardContent />;
+    case "leadgenerator":
+      return <LeadGeneratorContent />; // NEW
+    case "leads":
+      return <LeadsContent />;
+    case "campaigns":
+      return <CampaignsContent />;
+    case "posts":
+      return <PostsContent />;
+    case "comments":
+      return <CommentsContent />;
+    case "users":
+      return <UsersContent />;
+    case "billing":
+      return <BillingContent />; // NEW
+    case "settings":
+      return <SettingsContent />;
+    default:
+      return <DashboardContent />;
+  }
+};
 
   return (
     <div className="min-h-screen bg-shell flex">
@@ -561,5 +570,8 @@ const SettingsContent = () => {
     </div>
   );
 };
+
+
+
 
 export default AdminDashboard;
