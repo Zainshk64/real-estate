@@ -20,9 +20,11 @@ import {
   Filter,
   ChevronRight,
   CreditCard,
+  Download,
 } from "lucide-react";
 import LeadGeneratorContent from "./LeadGeneratorContent";
 import BillingContent from "./BillingContent";
+import ExportsContent from "./ExportContent";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -37,6 +39,7 @@ const AdminDashboard = () => {
     { id: "comments", label: "Comments", icon: MessageSquare },
     { id: "users", label: "Users & Roles", icon: UserCog },
     { id: "billing", label: "Billing", icon: CreditCard }, // NEW
+    { id: "exports", label: "Exports", icon: Download },
     { id: "settings", label: "Settings", icon: Settings },
   ];
 
@@ -58,6 +61,8 @@ const AdminDashboard = () => {
         return <UsersContent />;
       case "billing":
         return <BillingContent />; // NEW
+      case "exports":
+        return <ExportsContent />;
       case "settings":
         return <SettingsContent />;
       default:

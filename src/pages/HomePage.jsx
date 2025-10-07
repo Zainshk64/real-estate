@@ -28,7 +28,7 @@ const HomePage = () => {
         <Offering/>
         <BusinessComparison/>
         <FeaturedListings/>
-        <CategoryShowcase/>
+        {/* <CategoryShowcase/> */}
         <MarketStories/>
         <ParallaxEffect/>
         <Testimonials/>

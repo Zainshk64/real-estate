@@ -1,41 +1,63 @@
 import React from "react";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
-import { Home, Users, Building2, Trophy } from "lucide-react"; // icons
+import { Building2, Users, Globe2, Award } from "lucide-react";
 
 const stats = [
-  { id: 1, icon: <Home className="w-6 h-6 text-" />, value: 600, label: "Properties Sold" },
-  { id: 2, icon: <Users className="w-6 h-6 text-primary" />, value: 400, label: "Satisfied Clients" },
-  { id: 3, icon: <Building2 className="w-6 h-6 text-primary" />, value: 150, label: "Luxury Projects" },
-  { id: 4, icon: <Trophy className="w-6 h-6 text-primary" />, value: 25, label: "Awards Won" },
+  {
+    id: 1,
+    icon: <Globe2 className="w-6 h-6 text-[var(--color-sand)]" />,
+    value: 20,
+    label: "Countries Served",
+  },
+  {
+    id: 2,
+    icon: <Users className="w-6 h-6 text-[var(--color-sand)]" />,
+    value: 1200,
+    label: "Business Clients",
+  },
+  {
+    id: 3,
+    icon: <Building2 className="w-6 h-6 text-[var(--color-sand)]" />,
+    value: 350,
+    label: "Projects Completed",
+  },
+  {
+    id: 4,
+    icon: <Award className="w-6 h-6 text-[var(--color-sand)]" />,
+    value: 40,
+    label: "Industry Awards",
+  },
 ];
 
 const ParallaxEffect = () => {
   return (
     <section
-      className="relative  h-[80vh] lg:h-[90vh] flex  md:items-center justify-center text-white"
+      className="relative h-[80vh] lg:h-[90vh] flex md:items-center justify-center text-white"
       style={{
-        backgroundImage: "url('https://luminor-eight.vercel.app/images/section/features-properties-1.jpg')",
-        backgroundAttachment: "fixed", // Parallax effect
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80')",
+        backgroundAttachment: "fixed",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-[var(--color-forest)]/70"></div>
 
-      {/* Center Content */}
-      <div className="relative  top-20 px-4  md:top-0 z-10 text-center max-w-3xl">
-        <h1 className="text-3xl font-serif md:text-5xl font-bold mb-4">
-          Discover Your Dream Home
+      {/* Content */}
+      <div className="relative top-20 px-4 md:top-0 z-10 text-center max-w-3xl">
+        <h1 className="text-3xl font-serif md:text-5xl font-bold mb-4 text-[var(--color-shell)]">
+          Empowering Innovation Across Industries
         </h1>
-        <p className="text-sm md:text-md text-gray-200">
-          With Estate Orbit, explore properties tailored to your lifestyle and budget.
+        <p className="text-sm md:text-md text-[var(--color-sand)]">
+          From real estate to technology, retail to hospitality — Estate Orbit helps
+          businesses design smarter, connect deeper, and grow sustainably.
         </p>
       </div>
 
-      {/* Stats Bottom Right */}
-      <div className="absolute bottom-6 right-6 grid grid-cols-2 md:grid-cols-4 gap-6 bg-black/30 p-4 md:p-6 rounded-xl backdrop-blur-md">
+      {/* Stats */}
+      <div className="absolute bottom-6 right-6 grid grid-cols-2 md:grid-cols-4 gap-6 bg-[var(--color-ink)]/30 p-4 md:p-6 rounded-xl backdrop-blur-md">
         {stats.map((item) => (
           <motion.div
             key={item.id}
@@ -45,11 +67,16 @@ const ParallaxEffect = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center text-center"
           >
-            <div className="p-3 bg- rounded-full mb-2">{item.icon}</div>
-            <h2 className="text-2xl md:text-3xl font-bold">
+            <div className="p-3 bg-[var(--color-clay)]/20 rounded-full mb-2">
+              {item.icon}
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-shell)]">
               <CountUp end={item.value} duration={4} />
+              {item.id === 1 && "+"}
             </h2>
-            <p className="text-sm md:text-base text-gray-200">{item.label}</p>
+            <p className="text-sm md:text-base text-[var(--color-sand)]">
+              {item.label}
+            </p>
           </motion.div>
         ))}
       </div>

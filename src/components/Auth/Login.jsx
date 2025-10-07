@@ -91,7 +91,7 @@ const Login = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative bg-forest p-6 md:p-12 flex flex-col gap-10 justify-between min-h-[400px] md:min-h-[600px]"
+              className="relative bg-forest p-6 md:p-12 flex flex-col gap-10 justify-etween min-h-[400px] md:min-h-[600px]"
             >
               <div className="space-y-4 z-10">
                 <motion.h2
@@ -100,7 +100,7 @@ const Login = () => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="text-3xl md:text-5xl font-bold text-sand leading-tight"
                 >
-                  Find Your Dream Home Today
+                  Unlock Growth, Connections & Opportunities
                 </motion.h2>
 
                 <motion.p
@@ -109,8 +109,9 @@ const Login = () => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="text-sand/80 md:text-lg"
                 >
-                  Join thousands of happy homeowners who found their perfect
-                  property with us.
+                  From real estate to retail, join businesses and professionals
+                  building their next chapter on Estate Orbit your space for
+                  progress.
                 </motion.p>
               </div>
 
@@ -128,12 +129,12 @@ const Login = () => {
                     transition={{ duration: 0.3 }}
                     src={
                       currentView === "login" || currentView === "forgot"
-                        ? "https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg"
+                        ? "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
                         : currentView === "verify"
-                        ? "https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg"
-                        : "https://images.pexels.com/photos/6292341/pexels-photo-6292341.jpeg"
+                        ? "https://res.cloudinary.com/daljxhxzf/image/upload/v1759813975/vision2_ks0p9o.jpg"
+                        : "https://res.cloudinary.com/daljxhxzf/image/upload/v1759813974/vision1_rpuyl1.avif"
                     }
-                    alt="Real estate"
+                    alt="Login Thumbnail"
                     className="rounded-3xl object-cover w-full h-full"
                   />
                 </AnimatePresence>

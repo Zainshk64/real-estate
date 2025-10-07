@@ -76,7 +76,7 @@ function HomeShowcase() {
         </motion.div>
       </div>
 
-      <div className="px-4 lg:px-14 py-20">
+      {/* <div className="px-4 lg:px-14 py-20">
         <div className="grid md:grid-cols-3 w-full gap-6">
           {heroCards.map((card, index) => (
             <motion.article
@@ -114,7 +114,7 @@ function HomeShowcase() {
             </motion.article>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

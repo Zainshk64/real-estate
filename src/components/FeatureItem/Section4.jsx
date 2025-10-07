@@ -3,7 +3,7 @@ import SectionHeader from "../SectionHeader";
 const Section4 = () => {
   return (
     <section className="bg-shell py-20">
-      <div className="mx-auto w-full max-w-6xl px-4">
+      <div className="mx-auto w-full text-center md:text-left  max-w-6xl px-4">
         <SectionHeader
           eyebrow="Start Today"
           title="Ready to Power Your Business Growth?"

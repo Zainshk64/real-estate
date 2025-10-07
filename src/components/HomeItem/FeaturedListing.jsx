@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function FeaturedListings() {
   return (
     <section className="bg-shell py-20">
-      <div className="mx-auto w-full px-4  max-w-6xl space-y-10">
+      <div className="mx-auto w-full px-4 max-w-6xl space-y-10">
         <SectionHeader
           eyebrow="Featured Business Solutions"
           title="Discover Our Smart Tools Across Industries"
