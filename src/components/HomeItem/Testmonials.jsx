@@ -5,8 +5,8 @@ import { MessageSquare, Quote } from "lucide-react"
 
 function Testimonials() {
   return (
-    <section className="bg- px-4 py-20">
-      <div className="mx-auto w-full max-w-6xl space-y-12">
+    <section className="py-20">
+      <div className="mx-auto px-4 w-full max-w-6xl space-y-12">
        <SectionHeader
           eyebrow="Client Stories"
           title="What Our Residents Say"

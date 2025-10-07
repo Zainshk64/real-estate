@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-shell text-ink flex flex-col">
+    <div className="h-screen text-ink flex flex-col">
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />

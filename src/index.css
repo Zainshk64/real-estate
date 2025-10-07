@@ -37,6 +37,7 @@ html{
 
 body {
   @apply bg-shell text-ink font-sans leading-relaxed;
+  scroll-behavior: smooth;
 }
 
 

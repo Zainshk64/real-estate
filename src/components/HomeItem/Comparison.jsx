@@ -4,8 +4,8 @@ import { Check, Sparkles, X } from "lucide-react";
 import { motion } from "framer-motion";
 const Comparison = () => {
   return (
-  <section className="bg-shell px-4 py-20">
-  <div className="mx-auto w-full max-w-6xl space-y-10">
+  <section className="bg-shell  py-20">
+  <div className="mx-auto w-full px-4 max-w-6xl space-y-10">
     <SectionHeader
       eyebrow="Sales & Marketing"
       title="Empower Your Team or Let Our Experts Handle It"

@@ -41,8 +41,8 @@ const BusinessComparison = () => {
   ];
 
   return (
-    <section className="bg-shell px-4 py-20">
-      <div className="mx-auto w-full max-w-6xl space-y-10">
+    <section className="bg-shell  py-20">
+      <div className="mx-auto w-full px-4 max-w-6xl space-y-10">
         <SectionHeader
           eyebrow="Industry Use Cases"
           title="How Different Businesses Thrive on Estate Orbit"
@@ -62,7 +62,7 @@ const BusinessComparison = () => {
               <img
                 src={biz.image}
                 alt={biz.name}
-                className="w-full h-64 group-hover:scale-105 transition-all duration-500 blur-none lg:blur-sm group-hover:blur-none object-cover"
+                className="w-full h-64 group-hover:scale-105 transition-all duration-500 blur-none lg:blur-xs group-hover:blur-none object-cover"
               />
               <div className="p-6 space-y-4">
                 <h2 className="text-2xl font-serif text-forest">{biz.name}</h2>

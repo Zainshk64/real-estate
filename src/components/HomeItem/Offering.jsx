@@ -57,8 +57,8 @@ const Offering = () => {
   ];
 
   return (
-    <section className="bg-shell px-4 py-20">
-      <div className="mx-auto w-full max-w-6xl space-y-10">
+    <section className="bg-shell  py-20">
+      <div className="mx-auto w-full px-4 max-w-6xl space-y-10">
         <SectionHeader
           eyebrow="What Estate Orbit Offers"
           title="Empowering Businesses Across Industries"
