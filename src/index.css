@@ -3,7 +3,9 @@
 @import "tailwindcss";
 
 :root {
-  --color-shell: #f4ede4;
+  /* --color-shell: #f4ede4; */
+  --color-shell: #f5e8d7;
+
   --color-ink: #1f1b16;
   --color-forest: #1f3d2b;
   --color-sand: #ddc7ae;

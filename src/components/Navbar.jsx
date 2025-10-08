@@ -10,6 +10,13 @@ const navItems = [
     link: "/feature",
   },
   {
+    label: "Pricing",
+    link: "/pricing",
+  },{
+    label: "Contact",
+    link: "/contact",
+  },
+  {
     label: "Admin",
     link: "/admin",
   },
