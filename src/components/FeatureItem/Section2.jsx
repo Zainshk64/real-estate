@@ -33,7 +33,7 @@ const Section2 = () => {
           {features.map((f, i) => (
             <motion.div
               key={i}
-              className="bg-white shadow-lg rounded-2xl p-8 text-center hover:shadow-xl transition"
+              className="bg-white/50 shadow-lg rounded-2xl p-8 text-center hover:shadow-xl transition"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

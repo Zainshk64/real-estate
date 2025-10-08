@@ -69,14 +69,14 @@ const Contact = () => {
       title: "Email Us",
       details: "hello@leadsai.com",
       subDetails: "We reply within 24 hours",
-      color: "forest",
+      color: "clay",
     },
     {
       icon: MapPin,
       title: "Visit Us",
       details: "Islamabad, Pakistan",
       subDetails: "F-7 Markaz, Blue Area",
-      color: "sand",
+      color: "clay",
     },
     {
       icon: Clock,
@@ -133,15 +133,7 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {/* <p className="text-clay font-semibold text-sm uppercase tracking-wider mb-4">
-              Get In Touch
-            </p>
-            <h1 className="text-4xl md:text-6xl font-bold text-forest mb-6">
-              Let's Build Something Amazing Together
-            </h1>
-            <p className="text-xl text-ink/70 max-w-3xl mx-auto">
-              Have questions? Want to see a demo? Or ready to transform your lead generation? We're here to help you succeed.
-            </p> */}
+           
             <SectionHeader
               eyebrow="Get In Touch"
               title="Let's Build Something Amazing Together"
@@ -162,7 +154,7 @@ const Contact = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-sand/20 hover:shadow-lg transition-all"
+                className="bg-white/50 rounded-2xl p-6 shadow-sm border border-sand/20 hover:shadow-lg transition-all"
               >
                 <div
                   className={`w-12 h-12 bg-${item.color}/10 rounded-xl flex items-center justify-center mb-4`}
@@ -186,7 +178,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl p-8 shadow-lg border border-sand/20"
+            className="bg-white/50 rounded-2xl p-8 shadow-lg border border-sand/20"
           >
             <div className="flex items-center space-x-3 mb-6">
               <MessageSquare className="w-8 h-8 text-forest" />

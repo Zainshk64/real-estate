@@ -13,7 +13,11 @@ import {
   Briefcase,
   Shield,
   CheckCircle,
+  Loader,
+  Loader2,
 } from "lucide-react";
+import { loginUser } from "../../services/authControl";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [currentView, setCurrentView] = useState("login"); // login, register, verify, forgot
@@ -34,10 +38,10 @@ const Login = () => {
     captcha: false,
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", currentView, formData);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Form submitted:", currentView, formData);
+  // };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -45,6 +49,35 @@ const Login = () => {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
+  };
+
+  const [Loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (currentView === "login") {
+      try {
+        setLoading(true);
+        const res = await loginUser({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        // ✅ Store token
+        localStorage.setItem("token", res.access_token);
+
+        // Optional: Toast or alert
+        toast.success("Login successful!");
+
+        // ✅ Redirect
+        navigate("/");
+      } catch (error) {
+        toast.error(error.message || "Login failed");
+      } finally {
+        setLoading(false);
+      }
+    }
   };
 
   const getViewTitle = () => {
@@ -195,6 +228,7 @@ const Login = () => {
                       setShowPassword={setShowPassword}
                       handleSubmit={handleSubmit}
                       setCurrentView={setCurrentView}
+                      Loading={Loading}
                     />
                   )}
 
@@ -243,6 +277,7 @@ const LoginForm = ({
   setShowPassword,
   handleSubmit,
   setCurrentView,
+  Loading
 }) => (
   <motion.div
     initial={{ opacity: 0 }}
@@ -318,7 +353,11 @@ const LoginForm = ({
       className="w-full py-4 bg-forest text-sand rounded-xl font-semibold hover:bg-clay transition-colors duration-200 flex items-center justify-center space-x-2 group"
     >
       <span>Login</span>
-      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+      {Loading ? (
+        <Loader2 className="w-5 h-5 animate-spin group-hover:translate-x-1 transition-transform duration-200" />
+      ) : (
+        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+      )}
     </motion.button>
   </motion.div>
 );

@@ -12,28 +12,56 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import FeaturePage from "./pages/FeaturePage.jsx";
 import PricingPage from "./pages/PricingPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
-import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-
   return (
-    <div className="min-h-screen bg-shell text-ink">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/house/:id" element={<HouseDetail />} />
-          <Route path="/*" element={<ErrorPage />} />
-          <Route path="/feature" element={<FeaturePage />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/saleteam" element={<SaleTeamPage />} />
-          <Route path="/marketing" element={<MarketingPage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <>
+      <Toaster
+        position="bottom-left"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toasterId="default"
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          removeDelay: 1000,
+          style: {
+            background: "#f5e8d7",
+            color: "#1f3d2b",
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
+      <div className="min-h-screen bg-shell text-ink">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/house/:id" element={<HouseDetail />} />
+            <Route path="/*" element={<ErrorPage />} />
+            <Route path="/feature" element={<FeaturePage />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/saleteam" element={<SaleTeamPage />} />
+            <Route path="/marketing" element={<MarketingPage />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </>
   );
 }
 
