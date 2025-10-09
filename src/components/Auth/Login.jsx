@@ -746,10 +746,7 @@ const VerifyForm = ({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={handleVerifyEmail}
-      // onClick={(e) => {
-      //   handleSubmit(e);
-      //   setCurrentView("login");
-      // }}
+      
       className="w-full py-4 bg-forest text-sand rounded-xl font-semibold hover:bg-clay transition-colors duration-200 flex items-center justify-center space-x-2 group"
     >
       <span>Verify Account</span>

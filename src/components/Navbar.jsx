@@ -1,178 +1,315 @@
-import { Menu, Phone, Sparkles, User, X } from "lucide-react";
-import { motion } from "framer-motion";
+import {
+  Menu,
+  User,
+  X,
+  LogOut,
+  LayoutDashboard,
+  ChevronDown,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import ScrollToTop from "../hooks/ScrollToTop";
 
 const navItems = [
-  {
-    label: "Feature",
-    link: "/feature",
-  },
-  {
-    label: "Pricing",
-    link: "/pricing",
-  },
-  {
-    label: "Contact",
-    link: "/contact",
-  },
-  {
-    label: "Admin",
-    link: "/admin",
-  },
-  {
-    label: "Sale Team",
-    link: "/saleteam",
-  },
-  {
-    label: "Market",
-    link: "/marketing",
-  },
+  { label: "Features", link: "/feature" },
+  { label: "Pricing", link: "/pricing" },
+  { label: "Contact", link: "/contact" },
+  { label: "Admin", link: "/admin" },
+  { label: "Sales Team", link: "/saleteam" },
+  { label: "Marketing", link: "/marketing" },
 ];
 
 function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
-  const navigate = useNavigate();
-  // const location = location.pathname('/')
+  const [openUserPop, setOpenUserPop] = useState(false);
   const [isScroll, setIsScroll] = useState(false);
+  const [activeLink, setActiveLink] = useState("/");
+  const naviagate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname !== "/") {
-      setIsScroll(true);
-      return;
-    } else {
-      setIsScroll(false);
-    }
-    setIsScroll((prev) => (location.pathname !== "/" ? true : prev));
     const handleScroll = () => {
       setIsScroll(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname]);
+  }, []);
 
-  const [openUserpop, setOpenUserPop] = useState(false);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (openUserPop && !e.target.closest(".user-dropdown")) {
+        setOpenUserPop(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [openUserPop]);
+
+  const userEmail = "john.doe@example.com";
+  const userName = "John Doe";
   const token = localStorage.getItem("token");
-
   const handleLogout = () => {
+    ScrollToTop();
+    naviagate("/login");
     localStorage.clear();
-    window.scrollTo(0, 0);
-    toast.success("Logout Succesfully");
-    navigate("/login");
+    setOpenUserPop(false);
   };
+
+  const handleNavigation = (path) => {
+    setOpenMenu(false);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 bg-shell/80 backdrop-blur-md border-b transition-all duration-500 border-ink/10 ${
-        isScroll ? "backdrop-blur-lg  text-gray-700" : "py-4 md:py-6"
-      }  `}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScroll
+          ? "bg-white/50 backdrop-blur-lg shadow-sm border-b border-sand/20"
+          : "bg-shell/80 backdrop-blur-md"
+      }`}
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4">
-        <div
-          onClick={() => {
-            navigate("/"), window.scrollTo(0, 0);
-          }}
-          className="flex cursor-pointer items-center gap-2"
-        >
-          <motion.span
-            className="inline-flex h-10 w-10  items-center justify-center rounded-full bg-forest text-shell font-serif text-lg"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 18 }}
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 h-20">
+        {/* Logo */}
+        <Link to={"/"} onClick={ScrollToTop}>
+          <motion.div
+            className="flex cursor-pointer items-center gap-3 group"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            EO
-          </motion.span>
-          <div className="flex flex-col leading-tight text-sm md:text-base">
-            <span className="font-serif text-lg md:text-xl tracking-tight">
-              Estate Orbit
-            </span>
-            <span className="text-ink/70">Residences Marketplace</span>
-          </div>
-        </div>
-
-        <nav className="hidden items-center gap-6 text-sm md:flex">
-          {navItems.map((item, index) => (
-            <Link
-              key={index}
-              onClick={() => window.scrollTo(0, 0)}
-              to={item.link}
-              className="transition hover:text-forest"
+            <motion.div
+              className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-forest to-clay text-white font-bold text-xl shadow-lg"
+              whileHover={{ rotate: 5 }}
+              transition={{ type: "spring", stiffness: 400 }}
             >
-              {item.label}
+              EO
+            </motion.div>
+            <div className="flex flex-col leading-tight">
+              <span className="font-bold text-xl text-forest group-hover:text-clay transition-colors">
+                Estate Orbit
+              </span>
+              <span className="text-ink/60 text-xs">
+                Residences Marketplace
+              </span>
+            </div>
+          </motion.div>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-1">
+          {navItems.map((item, index) => (
+            <Link to={item.link} onClick={ScrollToTop}>
+              <motion.button
+                 whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.98 }}
+                key={index}
+                className={`px-4 py-2 rounded-lg cursor-pointer text-sm font-medium transition-all duration-200 ${
+                  activeLink === item.link
+                    ? "bg-forest/10 text-forest"
+                    : "text-ink hover:text-forest "
+                }`}
+              >
+                {item.label}
+              </motion.button>
             </Link>
           ))}
         </nav>
-
-        <div className="hidden relative items-center gap-4 md:flex">
+        {/* Desktop Auth Section */}
+        <div className="hidden lg:flex items-center gap-4">
           {token ? (
-            <button className="border p-2 border-forest rounded-full">
-              <User onClick={() => setOpenUserPop(!openUserpop)} />
-              {openUserpop && (
-                <>
+            <div className="relative user-dropdown">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setOpenUserPop(!openUserPop)}
+                className="flex items-center gap-3 px-4 py-2 rounded-xl bg-shell hover:bg-sand/30 border border-sand/30 transition-all"
+              >
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-forest to-clay flex items-center justify-center text-white font-semibold">
+                  {userName.charAt(0).toUpperCase()}
+                </div>
+                <span className="text-sm font-medium text-ink">{userName}</span>
+                <ChevronDown
+                  className={`w-4 h-4 text-ink/60 transition-transform ${
+                    openUserPop ? "rotate-180" : ""
+                  }`}
+                />
+              </motion.button>
+
+              <AnimatePresence>
+                {openUserPop && (
                   <motion.div
-                    initial={{ opacity: 0, x: 200 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className={`absolute p-3 bg-sand/60 mt-5 space-y-2 rounded-xl
-                   
-                      transition-all duration-500 right-0 `}
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-sand/20 overflow-hidden"
                   >
-                    <button
-                      onClick={handleLogout}
-                      className="w-full cursor-pointer bg-sand px-7 py-3 "
-                    >
-                      Logout
-                    </button>
-                    <button className="w-full cursor-pointer bg-sand px-7 py-3 ">
-                      Dashboard
-                    </button>
+                    {/* User Info */}
+                    <div className="p-4 bg-gradient-to-br from-forest/5 to-clay/5 border-b border-sand/20">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-forest to-clay flex items-center justify-center text-white font-bold text-lg">
+                          {userName.charAt(0).toUpperCase()}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-ink truncate">
+                            {userName}
+                          </p>
+                          <p className="text-xs text-ink/60 truncate">
+                            {userEmail}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Menu Items */}
+                    <div className="p-2">
+                      <button
+                        onClick={() => {
+                          handleNavigation("/dashboard");
+                          setOpenUserPop(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-shell transition-colors text-left group"
+                      >
+                        <LayoutDashboard className="w-5 h-5 text-forest" />
+                        <span className="text-sm font-medium text-ink group-hover:text-forest">
+                          Dashboard
+                        </span>
+                      </button>
+
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex cursor-pointer items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-50 transition-colors text-left group"
+                      >
+                        <LogOut className="w-5 h-5 text-red-600" />
+                        <span className="text-sm font-medium text-red-600">
+                          Logout
+                        </span>
+                      </button>
+                    </div>
                   </motion.div>
-                </>
-              )}
-            </button>
+                )}
+              </AnimatePresence>
+            </div>
           ) : (
-            <Link to={"/login"} onClick={() => window.scrollTo(0, 0)}>
-              <button className="inline-flex items-center gap-2 rounded-xl cursor-pointer bg-forest px-6 py-2 text-shell shadow-collage transition hover:bg-ink">
-                Register
-              </button>
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link to={"/login"}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={ScrollToTop}
+                  className="px-6 py-2.5 rounded-xl cursor-pointer bg-forest text-sand text-sm font-semibold shadow-lg hover:bg-clay transition-colors"
+                >
+                  Sign In
+                </motion.button>
+              </Link>
+            </div>
           )}
         </div>
 
-        <button
+        {/* Mobile Menu Button */}
+        <motion.button
+          whileTap={{ scale: 0.85 }}
+          whileHover={{ scale: 0.95 }}
           onClick={() => setOpenMenu(!openMenu)}
-          className="inline-flex items-center justify-center rounded-pill  border-forest/20 p-2 md:hidden"
+          className="lg:hidden p-2 rounded-xl cursor-pointer transition-colors"
         >
-          {!openMenu ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
-          {/* <span className="sr-only">Toggle navigation</span> */}
-        </button>
+          {openMenu ? (
+            <X className="h-6 w-6 text-ink" />
+          ) : (
+            <Menu className="h-6 w-6 text-ink" />
+          )}
+        </motion.button>
       </div>
-      <div className="w-full ">
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
         {openMenu && (
-          <>
-            <nav className="items-center w-full gap-3 -b-2 py-10 flex-col text-sm md:hidden flex">
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden overflow-hidden bg-shell/30 border-t border-sand/20"
+          >
+            <div className="px-4 py-6 space-y-2">
+              {/* Mobile Navigation Links */}
               {navItems.map((item, index) => (
-                <Link
+                <motion.div
                   key={index}
-                  to={item.link}
-                  onClick={() => {
-                    setOpenMenu(false), window.scrollTo(0, 0);
-                  }}
-                  className="transition text-xl hover:text-forest"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link to={item.link} onClick={ScrollToTop}>
+                    <button
+                      className={`w-full text-left cursor-pointer block px-4 py-3 rounded-xl text-base font-medium transition-all ${
+                        activeLink === item.link
+                          ? "bg-forest/10 text-forest"
+                          : "text-ink hover:bg-shell hover:text-forest"
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  </Link>
+                </motion.div>
               ))}
-            </nav>
-            <div className="items-center md:hidden pb-10 gap-4 flex flex-wrap justify-center ">
-              <Link to={"/login"} onClick={() => window.scrollTo(0, 0)}>
-                <button className="inline-flex items-center gap-2 rounded-2xl cursor-pointer bg-forest px-4 py-2 text-sm text-shell shadow-collage transition hover:bg-ink">
-                  Register
-                </button>
-              </Link>
+
+              {/* Mobile Auth Section */}
+              <div className="pt-4 border-t border-sand/20 space-y-3">
+                {!token ? (
+                  <>
+                    <div className="px-4 py-3  bg-shell/60 rounded-xl">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-forest to-clay flex items-center justify-center text-white font-bold text-lg">
+                          {userName.charAt(0).toUpperCase()}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-ink truncate">
+                            {userName}
+                          </p>
+                          <p className="text-xs text-ink/60 truncate">
+                            {userEmail}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => handleNavigation("/dashboard")}
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-shell/60 hover:bg-sand/30 transition-colors"
+                    >
+                      <LayoutDashboard className="w-5 h-5 text-forest" />
+                      <span className="text-sm font-medium text-ink">
+                        Dashboard
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex cursor-pointer items-center gap-3 px-4 py-3 rounded-xl bg-red-50 hover:bg-red-100 transition-colors"
+                    >
+                      <LogOut className="w-5 h-5 text-red-600" />
+                      <span className="text-sm  font-medium text-red-600">
+                        Logout
+                      </span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link to={"/login"}>
+                      <button
+                        onClick={() => handleNavigation("/login")}
+                        className="w-full px-6 cursor-pointer py-3 rounded-xl bg-forest text-sand text-base font-semibold shadow-lg hover:bg-clay transition-colors"
+                      >
+                        Sign In
+                      </button>
+                    </Link>
+                  </>
+                )}
+              </div>
             </div>
-          </>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </header>
   );
 }

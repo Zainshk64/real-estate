@@ -1,7 +1,7 @@
 import { ArrowUp } from "lucide-react";
 import { useState, useEffect } from "react";
-import { scrollToTop } from "../hooks/ScrollToTop";
 import { motion } from "framer-motion";
+import ScrollToTop from "../hooks/ScrollToTop";
 const BackToTopButton = () => {
   const [visible, setVisible] = useState(false);
 
@@ -21,7 +21,7 @@ const BackToTopButton = () => {
 
 
   
-      onClick={scrollToTop}
+      onClick={ScrollToTop}
       className="fixed bottom-6 right-6 p-3 duration-75 cursor-pointer bg-forest text-sand rounded-full shadow-lg hover:bg-clay transition-all"
     >
       <ArrowUp className="w-5 h-5" />
