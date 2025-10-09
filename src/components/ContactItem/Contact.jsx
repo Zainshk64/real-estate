@@ -127,7 +127,7 @@ const Contact = () => {
     <section className="bg-shell pb-24 py-24">
       <div className="mx-auto max-w-6xl flex-col gap-10 px-4 pb-24 pt-16 md:flex-row md:items-end md:gap-16 lg:pt-24">
         {/* Header Section */}
-        <div className="space-y-8 text-center mb-16">
+        <div className="space-y-8 text-center my-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -150,7 +150,7 @@ const Contact = () => {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
@@ -176,7 +176,7 @@ const Contact = () => {
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="bg-white/50 rounded-2xl p-8 shadow-lg border border-sand/20"
           >
