@@ -1,10 +1,10 @@
-import { Menu, Phone, Sparkles, X } from "lucide-react";
+import { Menu, Phone, Sparkles, User, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const navItems = [
-  
   {
     label: "Feature",
     link: "/feature",
@@ -12,7 +12,8 @@ const navItems = [
   {
     label: "Pricing",
     link: "/pricing",
-  },{
+  },
+  {
     label: "Contact",
     link: "/contact",
   },
@@ -51,6 +52,15 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
+  const [openUserpop, setOpenUserPop] = useState(false);
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.scrollTo(0, 0);
+    toast.success("Logout Succesfully");
+    navigate("/login");
+  };
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 bg-shell/80 backdrop-blur-md border-b transition-all duration-500 border-ink/10 ${
@@ -93,13 +103,39 @@ function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
-          
-          <Link to={"/login"} onClick={()=> window.scrollTo(0,0)}>
-            <button className="inline-flex items-center gap-2 rounded-xl cursor-pointer bg-forest px-6 py-2 text-shell shadow-collage transition hover:bg-ink">
-              Register
+        <div className="hidden relative items-center gap-4 md:flex">
+          {token ? (
+            <button className="border p-2 border-forest rounded-full">
+              <User onClick={() => setOpenUserPop(!openUserpop)} />
+              {openUserpop && (
+                <>
+                  <motion.div
+                    initial={{ opacity: 0, x: 200 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className={`absolute p-3 bg-sand/60 mt-5 space-y-2 rounded-xl
+                   
+                      transition-all duration-500 right-0 `}
+                  >
+                    <button
+                      onClick={handleLogout}
+                      className="w-full cursor-pointer bg-sand px-7 py-3 "
+                    >
+                      Logout
+                    </button>
+                    <button className="w-full cursor-pointer bg-sand px-7 py-3 ">
+                      Dashboard
+                    </button>
+                  </motion.div>
+                </>
+              )}
             </button>
-          </Link>
+          ) : (
+            <Link to={"/login"} onClick={() => window.scrollTo(0, 0)}>
+              <button className="inline-flex items-center gap-2 rounded-xl cursor-pointer bg-forest px-6 py-2 text-shell shadow-collage transition hover:bg-ink">
+                Register
+              </button>
+            </Link>
+          )}
         </div>
 
         <button
@@ -128,8 +164,7 @@ function Navbar() {
               ))}
             </nav>
             <div className="items-center md:hidden pb-10 gap-4 flex flex-wrap justify-center ">
-              
-              <Link to={"/login"} onClick={()=> window.scrollTo(0,0)}>
+              <Link to={"/login"} onClick={() => window.scrollTo(0, 0)}>
                 <button className="inline-flex items-center gap-2 rounded-2xl cursor-pointer bg-forest px-4 py-2 text-sm text-shell shadow-collage transition hover:bg-ink">
                   Register
                 </button>

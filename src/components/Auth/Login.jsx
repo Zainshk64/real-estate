@@ -16,26 +16,32 @@ import {
   Loader,
   Loader2,
 } from "lucide-react";
-import { loginUser } from "../../services/authControl";
+import {
+  loginUser,
+  registerUser,
+  resendOtp,
+  verifyEmail,
+} from "../../services/authControl";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  
   const [currentView, setCurrentView] = useState("login"); // login, register, verify, forgot
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
+    full_name: "",
     email: "",
-    phone: "",
+    phone_number: "",
     password: "",
     address: "",
     city: "",
     state: "",
     country: "",
-    businessName: "",
-    businessType: "",
+    business_name: "",
+    business_type: "",
     role: "admin",
     otp: "",
-    captcha: false,
   });
 
   // const handleSubmit = (e) => {
@@ -52,8 +58,13 @@ const Login = () => {
   };
 
   const [Loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = () => {
+    toast("form");
+  };
+
+  const handleSubmitLogin = async (e) => {
     e.preventDefault();
 
     if (currentView === "login") {
@@ -69,14 +80,91 @@ const Login = () => {
 
         // Optional: Toast or alert
         toast.success("Login successful!");
-
-        // ✅ Redirect
         navigate("/");
       } catch (error) {
         toast.error(error.message || "Login failed");
       } finally {
         setLoading(false);
       }
+    }
+  };
+
+  const handleVerifyEmail = async (e) => {
+    e.preventDefault();
+
+    if (currentView === "verify") {
+      try {
+        setLoading(true);
+        const res = await verifyEmail({
+          email: formData.email,
+          otp: formData.otp,
+        });
+
+        if (res.message || res.status === 200) {
+          toast.success(res.message || "Verification Successful!");
+          setCurrentView("login");
+        } else {
+          toast.error("Unexpected response. Try again.");
+        }
+      } catch (error) {
+        toast.error(error.message || "Verifying failed");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleSubmitRegister = async (e) => {
+    e.preventDefault();
+
+    if (currentView === "register") {
+      try {
+        setLoading(true);
+        const res = await registerUser({
+          full_name: formData.full_name,
+          email: formData.email,
+          phone_number: formData.phone_number,
+          password: formData.password,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          country: formData.country,
+          business_name: formData.business_name,
+          business_type: formData.business_type,
+          role: formData.role,
+        });
+
+        if (res.message || res.status === 200) {
+          toast.success(res.message || "Verify your email via OTP");
+          setCurrentView("verify");
+        } else {
+          toast.error("Unexpected response. Try again.");
+        }
+      } catch (error) {
+        // ✅ Handles "User already exists" or API errors
+        toast.error(error.message || "Registration failed");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+  const handleResendOtp = async () => {
+    try {
+      setLoading(true);
+      const res = await resendOtp({
+        email: formData.email,
+        otp: formData.otp
+      });
+      if (res.message || res.status === 200) {
+        toast.success(res.message || "Verify New Otp");
+      } else {
+        toast.error("Unexpected response. Try again.");
+      }
+    } catch (error) {
+      // ✅ Handles "User already exists" or API errors
+      toast.error(error.message || "Resend Otp failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,7 +190,7 @@ const Login = () => {
       case "register":
         return "Fill in your details to get started";
       case "verify":
-        return "Enter the OTP sent to your email and phone";
+        return "Enter the OTP sent to your email";
       case "forgot":
         return "Enter your email to receive OTP";
       default:
@@ -226,7 +314,7 @@ const Login = () => {
                       handleInputChange={handleInputChange}
                       showPassword={showPassword}
                       setShowPassword={setShowPassword}
-                      handleSubmit={handleSubmit}
+                      handleSubmitLogin={handleSubmitLogin}
                       setCurrentView={setCurrentView}
                       Loading={Loading}
                     />
@@ -238,17 +326,20 @@ const Login = () => {
                       handleInputChange={handleInputChange}
                       showPassword={showPassword}
                       setShowPassword={setShowPassword}
-                      handleSubmit={handleSubmit}
+                      handleSubmitRegister={handleSubmitRegister}
                       setCurrentView={setCurrentView}
+                      Loading={Loading}
                     />
                   )}
 
                   {currentView === "verify" && (
                     <VerifyForm
                       formData={formData}
+                      handleResendOtp={handleResendOtp}
                       handleInputChange={handleInputChange}
-                      handleSubmit={handleSubmit}
+                      handleVerifyEmail={handleVerifyEmail}
                       setCurrentView={setCurrentView}
+                      Loading={Loading}
                     />
                   )}
 
@@ -275,9 +366,9 @@ const LoginForm = ({
   handleInputChange,
   showPassword,
   setShowPassword,
-  handleSubmit,
+  handleSubmitLogin,
   setCurrentView,
-  Loading
+  Loading,
 }) => (
   <motion.div
     initial={{ opacity: 0 }}
@@ -349,7 +440,7 @@ const LoginForm = ({
     <motion.button
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      onClick={handleSubmit}
+      onClick={handleSubmitLogin}
       className="w-full py-4 bg-forest text-sand rounded-xl font-semibold hover:bg-clay transition-colors duration-200 flex items-center justify-center space-x-2 group"
     >
       <span>Login</span>
@@ -367,7 +458,8 @@ const RegisterForm = ({
   handleInputChange,
   showPassword,
   setShowPassword,
-  handleSubmit,
+  handleSubmitRegister,
+  Loading,
   setCurrentView,
 }) => (
   <motion.div
@@ -384,8 +476,8 @@ const RegisterForm = ({
         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink/40" />
         <input
           type="text"
-          name="name"
-          value={formData.name}
+          name="full_name"
+          value={formData.full_name}
           onChange={handleInputChange}
           placeholder="John Doe"
           className="w-full pl-12 pr-4 py-3 bg-shell border-2 border-transparent rounded-xl focus:border-forest focus:outline-none transition-colors duration-200"
@@ -419,8 +511,8 @@ const RegisterForm = ({
           <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink/40" />
           <input
             type="tel"
-            name="phone"
-            value={formData.phone}
+            name="phone_number"
+            value={formData.phone_number}
             onChange={handleInputChange}
             placeholder="+1 234 567 8900"
             className="w-full pl-12 pr-4 py-3 bg-shell border-2 border-transparent rounded-xl focus:border-forest focus:outline-none transition-colors duration-200"
@@ -525,8 +617,8 @@ const RegisterForm = ({
           <Building className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink/40" />
           <input
             type="text"
-            name="businessName"
-            value={formData.businessName}
+            name="business_name"
+            value={formData.business_name}
             onChange={handleInputChange}
             placeholder="Your Company"
             className="w-full pl-12 pr-4 py-3 bg-shell border-2 border-transparent rounded-xl focus:border-forest focus:outline-none transition-colors duration-200"
@@ -541,8 +633,8 @@ const RegisterForm = ({
           <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink/40" />
           <input
             type="text"
-            name="businessType"
-            value={formData.businessType}
+            name="business_type"
+            value={formData.business_type}
             onChange={handleInputChange}
             placeholder="Real Estate Agency"
             className="w-full pl-12 pr-4 py-3 bg-shell border-2 border-transparent rounded-xl focus:border-forest focus:outline-none transition-colors duration-200"
@@ -562,6 +654,8 @@ const RegisterForm = ({
           className="w-full pl-12 pr-4 py-3 bg-shell border-2 border-transparent rounded-xl focus:border-forest focus:outline-none transition-colors duration-200 appearance-none cursor-pointer"
         >
           <option value="admin">Admin</option>
+          <option value="User">User</option>
+
           <option value="sales">Sales</option>
           <option value="marketing">Marketing</option>
           <option value="owner">Owner</option>
@@ -569,7 +663,7 @@ const RegisterForm = ({
       </div>
     </div>
 
-    <div className="flex items-center space-x-3 p-4 bg-shell rounded-xl">
+    {/* <div className="flex items-center space-x-3 p-4 bg-shell rounded-xl">
       <input
         type="checkbox"
         name="captcha"
@@ -578,19 +672,23 @@ const RegisterForm = ({
         className="w-5 h-5 rounded border-2 border-forest text-forest focus:ring-forest"
       />
       <span className="text-sm text-ink">I'm not a robot (CAPTCHA)</span>
-    </div>
+    </div> */}
 
     <motion.button
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      onClick={(e) => {
-        handleSubmit(e);
-        setCurrentView("verify");
-      }}
+      onClick={handleSubmitRegister}
+      // onClick={(e) => {
+      //   setCurrentView("verify");
+      // }}
       className="w-full py-4 bg-forest text-sand rounded-xl font-semibold hover:bg-clay transition-colors duration-200 flex items-center justify-center space-x-2 group"
     >
       <span>Create Account</span>
-      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+      {Loading ? (
+        <Loader2 className="w-5 h-5 animate-spin group-hover:translate-x-1 transition-transform duration-200" />
+      ) : (
+        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+      )}{" "}
     </motion.button>
   </motion.div>
 );
@@ -598,8 +696,10 @@ const RegisterForm = ({
 const VerifyForm = ({
   formData,
   handleInputChange,
-  handleSubmit,
+  handleVerifyEmail,
+  handleResendOtp,
   setCurrentView,
+  Loading,
 }) => (
   <motion.div
     initial={{ opacity: 0 }}
@@ -611,15 +711,25 @@ const VerifyForm = ({
       <CheckCircle className="w-5 h-5 text-forest mt-0.5" />
       <div>
         <p className="text-ink font-medium mb-1">Verification codes sent!</p>
-        <p className="text-ink/60 text-sm">
-          Check your email and phone for OTP codes.
-        </p>
+        <p className="text-ink/60 text-sm">Check your email for OTP code.</p>
       </div>
     </div>
 
     <div>
+      <label className="block text-sm font-semibold text-ink mb-2">Email</label>
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleInputChange}
+        placeholder="Enter Email"
+        className="w-full px-4 py-3 bg-shell border-2 border-transparent rounded-xl focus:border-forest focus:outline-none transition-colors duration-200 text-center text-2xl tracking-widest font-bold"
+      />
+    </div>
+
+    <div>
       <label className="block text-sm font-semibold text-ink mb-2">
-        Email OTP
+        Phone OTP
       </label>
       <input
         type="text"
@@ -632,41 +742,32 @@ const VerifyForm = ({
       />
     </div>
 
-    <div>
-      <label className="block text-sm font-semibold text-ink mb-2">
-        Phone OTP
-      </label>
-      <input
-        type="text"
-        name="phoneOtp"
-        placeholder="Enter 6-digit OTP"
-        maxLength={6}
-        className="w-full px-4 py-3 bg-shell border-2 border-transparent rounded-xl focus:border-forest focus:outline-none transition-colors duration-200 text-center text-2xl tracking-widest font-bold"
-      />
-    </div>
-
     <motion.button
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      onClick={(e) => {
-        handleSubmit(e);
-        setCurrentView("login");
-      }}
+      onClick={handleVerifyEmail}
+      // onClick={(e) => {
+      //   handleSubmit(e);
+      //   setCurrentView("login");
+      // }}
       className="w-full py-4 bg-forest text-sand rounded-xl font-semibold hover:bg-clay transition-colors duration-200 flex items-center justify-center space-x-2 group"
     >
       <span>Verify Account</span>
       <CheckCircle className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
     </motion.button>
 
-    <button className="w-full text-center text-sm text-forest hover:text-clay font-semibold transition-colors">
-      Resend OTP Codes
-    </button>
     <button
+      onClick={handleResendOtp}
+      className="w-full text-center text-sm text-forest hover:text-clay font-semibold transition-colors"
+    >
+      Resend OTP
+    </button>
+    {/* <button
       onClick={() => setCurrentView("login")}
       className="w-full text-center text-sm text-forest hover:text-clay font-semibold transition-colors"
     >
       Back to Login
-    </button>
+    </button> */}
   </motion.div>
 );
 
@@ -703,6 +804,7 @@ const ForgotPasswordForm = ({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={handleSubmit}
+      e
       className="w-full py-4 bg-forest text-sand rounded-xl font-semibold hover:bg-clay transition-colors duration-200 flex items-center justify-center space-x-2 group"
     >
       <span>Send OTP</span>
